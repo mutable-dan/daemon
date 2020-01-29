@@ -180,9 +180,12 @@ bool tools::Daemon::wait()
 ///
 const filesystem::path& tools::Daemon::makePidPath()
 {
-    m_path /= m_strApplicationName;
-    m_path /= ".pid";
-    return m_path;
+	 if( false == m_bHavePidPath )
+	 {
+	    m_path /= m_strApplicationName + ".pid";
+		 m_bHavePidPath = true;
+	 }
+	 return m_path;
 }
 
 

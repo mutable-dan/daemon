@@ -18,6 +18,7 @@ class Daemon
         std::filesystem::path m_path                   = "/tmp/";
         std::string		      m_strApplicationName     = "";      // name of app and thus pid file
         bool                  m_bInit                  = false;
+		  bool						m_bHavePidPath           = false;
 
     public:
         static sem_t   m_sem;
