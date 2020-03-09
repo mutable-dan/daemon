@@ -1,13 +1,16 @@
 CPP=g++-8
 CC =gcc-8
-INSTALL_DIR = bin/
-INCLUDE_DIR = -I. 
+INSTALL_DIR     = /usr/lib/libdaemon/
+INCLUDE_DIR     = -I. 
+INCLUDE_INSTALL = /usr/include/libdaemon
 
 RM=/bin/rm
+RMDIR=/bin/rmdir
 
 LIB      = libdaemon.so
 LIBA     = libdaemon.a
 SOURCE   = daemon.cpp
+HEADER   = daemon.h
 LINKLIBS = -lpthread -lstdc++fs
 
 OBJS     = $(SOURCE:.cpp=.o) 
@@ -39,10 +42,17 @@ all:$(OBJS)
 
 install: all
 	install -d $(INSTALL_DIR)
-	install -m 750 $(EXE) $(INSTALL_DIR)
+	install -d $(INCLUDE_INSTALL)
+	install -m 644 $(LIB) $(INSTALL_DIR)
+	install -m 644 $(LIBA) $(INSTALL_DIR)
+	install -m 644 $(HEADER) $(INCLUDE_INSTALL)
 
 uninstall:
-	$(RM) -rf $(INSTALL_DIR)
+	$(RM) -f $(INSTALL_DIR)/$(LIB)
+	$(RM) -f $(INSTALL_DIR)/$(LIBA)
+	$(RM) -f $(INCLUDE_INSTALL)/$(HEADER)
+	$(RMDIR) -v $(INSTALL_DIR)
+	$(RMDIR) -v $(INCLUDE_INSTALL)
 
 clean:
 	$(RM) -f *.o *.d $(LIB) $(LIBA) 
