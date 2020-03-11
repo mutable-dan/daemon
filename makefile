@@ -1,8 +1,8 @@
 CPP=g++-8
 CC =gcc-8
-INSTALL_DIR     = /usr/lib/libdaemon/
+INSTALL_DIR     = /usr/local/lib/
 INCLUDE_DIR     = -I. 
-INCLUDE_INSTALL = /usr/include/libdaemon
+INCLUDE_INSTALL = /usr/local/include/libdaemon
 
 RM=/bin/rm
 RMDIR=/bin/rmdir
@@ -34,25 +34,23 @@ debug: all
 .PHONY:install
 
 all:$(OBJS)
-	$(CPP) -shared -o $(LIB) $(OBJS) $(LINKLIBS)
-	ar rcs $(LIBA) $(OBJS)
+        $(CPP) -shared -o $(LIB) $(OBJS) $(LINKLIBS)
+        ar rcs $(LIBA) $(OBJS)
 
 %.o: %.cpp
-	$(CPP) $(CFLAGS) $(INCLUDE_DIR) -MMD -MP -c $< -o $@
+        $(CPP) $(CFLAGS) $(INCLUDE_DIR) -MMD -MP -c $< -o $@
 
 install: all
-	install -d $(INSTALL_DIR)
-	install -d $(INCLUDE_INSTALL)
-	install -m 644 $(LIB) $(INSTALL_DIR)
-	install -m 644 $(LIBA) $(INSTALL_DIR)
-	install -m 644 $(HEADER) $(INCLUDE_INSTALL)
+        install -d $(INCLUDE_INSTALL)
+        install -m 644 $(LIB) $(INSTALL_DIR)
+        install -m 644 $(LIBA) $(INSTALL_DIR)
+        install -m 644 $(HEADER) $(INCLUDE_INSTALL)
 
 uninstall:
-	$(RM) -f $(INSTALL_DIR)/$(LIB)
-	$(RM) -f $(INSTALL_DIR)/$(LIBA)
-	$(RM) -f $(INCLUDE_INSTALL)/$(HEADER)
-	$(RMDIR) -v $(INSTALL_DIR)
-	$(RMDIR) -v $(INCLUDE_INSTALL)
+        $(RM) -f $(INSTALL_DIR)/$(LIB)
+        $(RM) -f $(INSTALL_DIR)/$(LIBA)
+        $(RM) -f $(INCLUDE_INSTALL)/$(HEADER)
+        $(RMDIR) -v $(INCLUDE_INSTALL)
 
 clean:
-	$(RM) -f *.o *.d $(LIB) $(LIBA) 
+        $(RM) -f *.o *.d $(LIB) $(LIBA) 
