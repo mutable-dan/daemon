@@ -75,6 +75,7 @@ int main( int argc, char* argv[] )
          cout << "run in foreground" << endl << endl;
          // start prog body
          daemonApp.runForeground();
+         cout << "stop in foreground" << endl << endl;
       } else
       {
          cout << "run as daemon" << endl << endl;
