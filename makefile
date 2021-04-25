@@ -1,5 +1,5 @@
-CPP=g++-8
-CC =gcc-8
+CPP=g++
+CC =gcc
 INSTALL_DIR     = /usr/local/lib/
 INCLUDE_DIR     = -I. 
 INCLUDE_INSTALL = /usr/local/include/libdaemon
